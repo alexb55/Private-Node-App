@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="https://unpkg.com/@shopify/polaris@4.15.2/styles.min.css" />
+    <!--<script src="https://cdn.shopify.com/s/assets/external/app.js"></script>-->
+
+    <script>
+      window.apiKey = "<%= apiKey %>"
+      window.shopOrigin = "<%= shop %>"
+
+    </script>
+
+    <div id="root"></div>
+    <script src="/assets/admin/css.js"></script>
+    <script src="/assets/admin/shopify.js"></script>
+    <script src="/assets/admin/main_big.js"></script>
+    <script src="/assets/frontend/libs1.js"></script>
+    <script src="/assets/frontend/libs2.js"></script>
+    <script src="/assets/admin/<%= asset %>.js"></script>
+  </body>
+</html>

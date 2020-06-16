@@ -1,0 +1,83 @@
+<div style="float:left;width:100%;">
+  <% order.line_items.forEach(li => { %>
+
+    <div style="clear:both;float:left;width:100%;border-bottom:0px solid #c7c7c0;">
+
+      <div style="clear:both;float:left;width:calc(100% - 175px);padding:15px 0;vertical-align:top;line-height:18px;font-size:13px;color:#51514e;">
+          <div style="float:left;width:96px;">
+            <% if (li.product_url) { %><a href="<%= li.product_url  %>"><% } %>
+              <% let imgSrc = "XXXXXXXXXXXXXXXXXXXX"; %>
+              <% if (li.product_image) { imgSrc = li.product_image; } %>
+              <img src="<%= imgSrc %>" />
+            <% if (li.product_url) { %></a><% } %>
+          </div>
+          <div style="float:left;min-width:270px;max-width:135px;padding-left:5px;">
+            <strong style="font-size:17px;"><%= li.title %></strong>
+            <% if (li.variant_title) { %>
+              <br/><%= li.variant_title %>
+            <% } %>
+            <% li.properties.forEach(p => { %>
+              <% if (p.name.toLowerCase().trim() != 'for product' && p.name.toLowerCase().trim() != 'original price') { %>
+                <br/><strong><%= p.name %>:</strong> <%= p.value %>
+              <% }; %>
+            <% }); %>
+          </div>
+      </div>
+      <div style="float:left;width:70px;text-align:right;letter-spacing:-0.05em;padding:15px 4px 0 0;line-height:18px;font-size:14px;color:#51514e;">
+          <% if (li.compare_at_price) { %><s><%= parseFloat(li.compare_at_price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %></s><br/><% } %>
+          <%= parseFloat(li.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %>
+      </div>
+      <div style="float:left;width:20px;text-align:right;letter-spacing:-0.1em;padding:15px 4px;line-height:18px;font-size:14px;color:#51514e;">
+          <%= li.quantity  %>
+      </div>
+      <div style="float:left;width:70px;text-align:right;letter-spacing:-0.05em;padding:15px 0;line-height:18px;font-size:14px;color:#51514e;">
+          <% if (li.compare_at_price) { %><s><%= (parseFloat(li.compare_at_price) * li.quantity).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %></s><br/><% } %>
+          <%= (li.price * li.quantity).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %>
+      </div>
+
+    </div>
+  <% }); %>
+</div>
+
+<table cellspacing="0" cellpadding="0" border="0" style="clear:both;width:100%;">
+    <tr>
+        <td style="width:100%;padding:10px 15px 25px;line-height:18px;vertical-align:top;font-size:14px;color:#51514e;">
+            <div style="float:right;min-width:245px;max-width:290px;padding-top:15px;">
+
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                      <td align="right" style="min-width:80%;padding:1px 0;font-size:14px;color:#51514e;">Subtotal:</td>
+                      <td align="right" style="max-width:85px;padding:1px 0;font-size:14px;color:#51514e;"><%= parseFloat(order.subtotal_adjusted).toLocaleString('en-US', { style: 'currency', currency: 'USD' })  %></td>
+                    </tr>
+                    <% if (parseFloat(order.total_discounts)) { %>
+                    <tr>
+                      <td align="right" style="min-width:80%;padding:1px 0;font-size:14px;color:#51514e;">Discount<% if (order.discount_codes.length) { %> (<%= order.discount_codes[0].code %>)<% } %>:</td>
+                      <td align="right" style="max-width:85px;padding:1px 0;font-size:14px;color:#51514e;">-<%= parseFloat(order.total_discounts).toLocaleString('en-US', { style: 'currency', currency: 'USD' })  %></td>
+                    </tr>
+                    <% } %>
+                    <tr>
+                      <td align="right" style="min-width:80%;padding:1px 0;font-size:14px;color:#51514e;">Shipping:</td>
+                      <td align="right" style="max-width:85px;padding:1px 0;font-size:14px;color:#51514e;"><%= parseFloat(order.shipping_lines.length ? order.shipping_lines[0].price : 0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })  %></td>
+                    </tr>
+                    <% if (order.total_tax) { %>
+                    <tr>
+                      <td align="right" style="min-width:80%;padding:1px 0;font-size:14px;color:#51514e;">Sales Tax:</td>
+                      <td align="right" style="max-width:85px;padding:1px 0;font-size:14px;color:#51514e;"><%= parseFloat(order.total_tax).toLocaleString('en-US', { style: 'currency', currency: 'USD' })  %></td>
+                    </tr>
+                    <% } %>
+                    <tr>
+                      <td align="right" style="min-width:80%;padding:1px 0;font-size:14px;color:#51514e;">
+                        <div style="margin-top:5px;padding-top:5px;border-top:1px solid #c7c7c0;font-weight:bold;">Order Total:</div>
+                      </td>
+                      <td align="right" style="max-width:85px;padding:1px 0;font-size:14px;color:#51514e;">
+                        <div style="margin-top:5px;padding-top:5px;border-top:1px solid #c7c7c0;font-weight:bold;"><%= parseFloat(order.total_price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })  %></div>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+
+            </div>
+        </td>
+    </tr>
+</table>

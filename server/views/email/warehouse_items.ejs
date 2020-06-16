@@ -1,0 +1,22 @@
+<table style="width:100%;" cellspacing="0" cellpadding="0" border="0"><tbody>
+  <% items.forEach(i => { %>
+
+    <% let product = { handle: '', images: [{ src: '' }] }; %>
+    <% let productF = products.filter(p => p.id == i.product_id); %>
+    <% if (productF) { product = productF[0]; } %>
+
+    <tr>
+      <td style="width:100px;padding:15px 0;border-bottom:0px solid #c7c7c0;vertical-align:top;">
+          <a href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXxx/<%= product.handle  %>" target="_blank">
+              <img style="border:1px solid #eeeeec;" src="<%= product.images[0].src.replace(/\.(?=[^.]*$)/, '_96x.')  %>">
+          </a>
+      </td>
+      <td style="padding:15px;line-height:18px;border-bottom:0px solid #c7c7c0;font-size:13px;color:#51514e;" valign="top" align="left">
+          <strong style="font-size:17px;"><%= i.title  %></strong>
+          <div style="margin-top:6px;"><strong>SKU:</strong> <%= i.sku  %></div>
+          <div style="margin-top:6px;"><strong>QTY:</strong> <%= i.quantity  %></div>
+      </td>
+    </tr>
+
+  <% }); %>
+</tbody></table>
