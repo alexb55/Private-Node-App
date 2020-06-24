@@ -5,16 +5,8 @@ const os = require('os');
 
 const moment = require('moment');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
-
-const xero = require('xero-node');
-const xeroConfig = require(path.resolve('.', './config/xero/config.json'));
-if (xeroConfig.privateKeyPath && !xeroConfig.privateKey) {
-  xeroConfig.privateKey = fs.readFileSync(
-    path.resolve('.', xeroConfig.privateKeyPath)
-  );
-}
-const xeroClient = new xero.PrivateApplication(xeroConfig);
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
+const { xeroClient } = require(path.resolve('.', './middleware/xero'));
 
 let offset = new moment();
 offset = offset.subtract(15, 'minutes');

@@ -7,7 +7,7 @@ const crypto = require('crypto');
 
 const moment = require('moment');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 function sortObject(object) {
   var sortedObj = {},

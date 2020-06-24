@@ -8,7 +8,7 @@ const crypto = require('crypto');
 
 var moment = require('moment');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 let gatherUpPrivateKey =
     'XXXXXXXXXXXX',

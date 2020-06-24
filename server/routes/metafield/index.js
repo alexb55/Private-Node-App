@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+  router = express.Router();
 const path = require('path');
 
 const bodyParser = require('body-parser');
@@ -12,50 +12,10 @@ router.use(
   })
 );
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+const handlers = require(path.resolve('.', './server/handlers/metafield'));
 
-router.get('/product/:id.:ns.:key', (req, res) => {
-  shopifyClient.metafield
-    .list({
-      metafield: {
-        owner_resource: 'product',
-        owner_id: req.params.id,
-        //namespace: req.params.ns,
-        //key: req.params.key,
-      },
-    })
-    .then(metafields => {
-      metafields = metafields.filter(m => {
-        return m.namespace == req.params.ns && m.key == req.params.key;
-      });
-      let metafield = {};
-      if (metafields.length) {
-        metafield = JSON.parse(metafields[0].value);
-      }
-      res.send(JSON.stringify(metafield));
-    });
-});
-
-router.get('/:ns.:key', (req, res) => {
-  shopifyClient.metafield
-    .list({ namespace: req.params.ns, key: req.params.key })
-    .then(metafields => {
-      let metafield = {};
-      if (metafields.length) {
-        metafield = JSON.parse(metafields[0].value);
-      }
-      res.send(JSON.stringify(metafield));
-    });
-});
-
-router.post('/save', (req, res) => {
-  let metafield = { ...req.body.metafield };
-  shopifyClient.metafield
-    .create(metafield)
-    .catch(err => console.error(err))
-    .then(metafield => {
-      res.send(JSON.stringify(metafield));
-    });
-});
+router.get('/product/:id.:ns.:key', handlers.getForProduct);
+router.get('/:ns.:key', handlers.getMetafield);
+router.post('/save', handlers.save);
 
 module.exports = router;

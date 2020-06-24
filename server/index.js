@@ -72,7 +72,7 @@ if (global.isDevelopment) {
 const snippetsPath = path.resolve(__dirname, '../snippets');
 app.use('/snippets', express.static(snippetsPath));
 
-let customRoutes = [
+[
   'cm',
   'vendor',
   'review',
@@ -90,8 +90,7 @@ let customRoutes = [
   'app/productmods',
   'app/journey',
   'app/customizer',
-];
-customRoutes.map(r => app.use(`/${r}`, require(`./routes/${r}`)));
+].map(r => app.use(`/${r}`, require(`./routes/${r}`)));
 
 // Error Handlers
 app.use((req, res, next) => {

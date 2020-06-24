@@ -4,7 +4,7 @@ const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 class RouterConfig {
 

@@ -6,12 +6,9 @@ const rp = require('request-promise');
 
 var moment = require('moment');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
-
-const cmConfig = require(path.resolve('.', './config/cm.json'));
-var createsend = require('createsend-node');
-var cmApiClient = new createsend(cmConfig);
+const { cmApiClient, cmConfig } = require(path.resolve('.', './middleware/cm'));
 const cmListIds = cmConfig.cmListIds;
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 const journey = require(path.resolve('.', './server/utils/journey'));
 

@@ -13,8 +13,8 @@ var j2xParser = new parser.j2xParser({
   ignoreAttributes: false,
   ignoreNameSpace: false,
 });
-//
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 shopifyClient.on('callGraphqlLimits', limits => console.log(limits));
 
 const Job = () => {

@@ -6,7 +6,7 @@ const rp = require('request-promise');
 
 var moment = require('moment');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 const knex = require(path.resolve('.', './middleware/knex'));
 

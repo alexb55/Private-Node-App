@@ -5,8 +5,9 @@ const os = require('os');
 
 const moment = require('moment');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
-const cmApiClient = require(path.resolve('.', './middleware/cm'));
+const { cmApiClient, cmConfig } = require(path.resolve('.', './middleware/cm'));
+const cmListIds = cmConfig.cmListIds;
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 const Job = () => {
   console.log('Order Checkin started');

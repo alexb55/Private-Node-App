@@ -4,7 +4,7 @@ const path = require('path');
 const os = require('os');
 const rp = require('request-promise');
 
-const shopifyClient = require(path.resolve('.', './middleware/shopify'));
+const { shopifyClient } = require(path.resolve('.', './middleware/shopify'));
 
 const knex = require(path.resolve('.', './middleware/knex'));
 
